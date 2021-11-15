@@ -5,6 +5,7 @@ import json
 import datetime
 from textblob import TextBlob
 import praw
+from psaw import PushshiftAPI
 
 CLIENT_ID ='dzWhrql4hgjVRxB5hIUNHQ'
 SECRET_KEY ='ywKBOH5X09b00r6fTwnfUFWzkJ3T2A'
@@ -43,11 +44,18 @@ reddit = praw.Reddit(
     username='VouteDEV',
     password='ceciestunmotdepassesécurisé75',
 )
+
+api = PushshiftAPI(reddit)
+
 df = pd.DataFrame()
 
-subreddit = reddit.subreddit("berkeley")
-print(subreddit.display_name)
-for submission in subreddit.new(limit=1000):
+start_epoch=int(datetime.datetime(2020, 8, 15).timestamp())
+end_epoch = int(datetime.datetime(2021, 8, 15).timestamp())
+
+list = api.search_submissions(after=start_epoch,
+                            before=end_epoch,
+                            subreddit='berkeley',limit=500)
+for submission in list:
     df = df.append({
         'title': submission.title,
         'selftext': submission.selftext,
