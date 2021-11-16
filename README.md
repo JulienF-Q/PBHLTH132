@@ -1,2 +1,2 @@
 # PBHLTH132
-This the git repositori for the code for this semester project 
+This the gitfor the code for this semester project 
