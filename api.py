@@ -54,15 +54,14 @@ end_epoch = int(datetime.datetime(2021, 8, 15).timestamp())
 
 list = api.search_submissions(after=start_epoch,
                             before=end_epoch,
-                            subreddit='berkeley',limit=500)
+                            subreddit='berkeley',limit=None)
 for submission in list:
     df = df.append({
         'title': submission.title,
         'selftext': submission.selftext,
         'created': datetime.datetime.utcfromtimestamp(submission.created_utc),
-        'sentiment': {'polarity': TextBlob(submission.selftext).sentiment.polarity,
-                      'subjectivity': TextBlob(submission.selftext).sentiment.subjectivity
-                      }
-    }, ignore_index=True)
-print(df['created'])
+        'sentiment_polarity': TextBlob(submission.selftext).sentiment.polarity,
+        'sentiment_subjectivity': TextBlob(submission.selftext).sentiment.subjectivity
 
+    }, ignore_index=True)
+df.to_csv(r'C:\Users\julie\Downloads\ProjectPH.csv')
