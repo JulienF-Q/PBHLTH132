@@ -1,7 +1,6 @@
 
 import requests
 import pandas as pd
-import json
 import datetime
 from textblob import TextBlob
 import praw
