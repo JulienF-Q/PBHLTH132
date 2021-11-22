@@ -48,7 +48,7 @@ api = PushshiftAPI(reddit)
 
 df = pd.DataFrame()
 
-start_epoch=int(datetime.datetime(2020, 8, 15).timestamp())
+start_epoch=int(datetime.datetime(2016, 8, 15).timestamp())
 end_epoch = int(datetime.datetime(2021, 8, 15).timestamp())
 
 list = api.search_submissions(after=start_epoch,
