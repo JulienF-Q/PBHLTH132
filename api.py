@@ -55,12 +55,22 @@ list = api.search_submissions(after=start_epoch,
                             before=end_epoch,
                             subreddit='berkeley',limit=None)
 for submission in list:
+    status= "none"
+    polarity = TextBlob(submission.selftext).sentiment.polarity
+    if (-0.25 <= polarity <= 0.25):
+        status = "Neutral"
+    if (polarity< -0.25):
+        status = "Depressed"
+    if (0.25 < polarity):
+        status = "Happy"
     df = df.append({
         'title': submission.title,
         'selftext': submission.selftext,
         'created': datetime.datetime.utcfromtimestamp(submission.created_utc),
-        'sentiment_polarity': TextBlob(submission.selftext).sentiment.polarity,
-        'sentiment_subjectivity': TextBlob(submission.selftext).sentiment.subjectivity
-
+        'sentiment_polarity': polarity,
+        'sentiment_subjectivity': TextBlob(submission.selftext).sentiment.subjectivity,
+        'status': status
     }, ignore_index=True)
+
+
 df.to_csv(r'C:\Users\julie\Downloads\ProjectPH.csv')
