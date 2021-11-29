@@ -31,6 +31,7 @@ for index in indexs:
             month_2022.append(date_2022)
             only_month_2022.append(only_date_2022)
 
+
 for month_1 in month:
     avg_month = 0
     sum = 0
@@ -51,13 +52,12 @@ for month_2022_1 in only_month_2022:
         date_month = str(data['created'][index].month)
         if date_month == month_2022_1:
             count_2022 = count_2022 + 1
-            sum_2022 = sum + data['sentiment_polarity'][index]
+            sum_2022 = sum_2022 + data['sentiment_polarity'][index]
     avg_2022 = sum_2022/count_2022
     predicted_avg.append(avg_2022)
 
 
 print(predicted_avg)
-
 
 avg_tot_day =[]
 for day_1 in days:
@@ -91,7 +91,8 @@ plt.hist(data['status'])
 plt.title('Distribution of the sentiment')
 plt.show()
 
-
+month_2022 = pd.to_datetime(month_2022)
+month_2022 = sorted(month_2022)
 print(month_2022)
 plt.plot(month_2022, predicted_avg)
 plt.xlabel('Date')
