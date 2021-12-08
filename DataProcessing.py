@@ -18,6 +18,7 @@ days =[]
 avg_tot_month =[]
 predicted_avg = []
 
+# create date vectors for plot and calculus purposes
 for index in indexs:
         date = str(data['created'][index].year)+"-"+str(data['created'][index].month)
         if (date in month) == False:
