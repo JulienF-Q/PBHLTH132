@@ -28,9 +28,6 @@ res = requests.get("https://oauth.reddit.com/r/berkeley/new.json?limit=1000",
 print(res)
 
 for post in res['data']['children']:
-    
-
-
    
 
 print(df['sentiment'])
@@ -48,8 +45,8 @@ api = PushshiftAPI(reddit)
 
 df = pd.DataFrame()
 
-start_epoch=int(datetime.datetime(2016, 8, 15).timestamp())
-end_epoch = int(datetime.datetime(2021, 8, 15).timestamp())
+start_epoch=int(datetime.datetime(2013, 8, 15).timestamp())
+end_epoch = int(datetime.datetime(2021, 12, 8).timestamp())
 
 list = api.search_submissions(after=start_epoch,
                             before=end_epoch,
@@ -73,4 +70,4 @@ for submission in list:
     }, ignore_index=True)
 
 
-df.to_csv(r'C:\Users\julie\Downloads\ProjectPH.csv')
+df.to_csv(f'ProjectPH_2013_2021.csv')
